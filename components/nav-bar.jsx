@@ -1,0 +1,44 @@
+import { Header, Title, NavMenuButton, PrimaryNav } from "@trussworks/react-uswds"
+import Link from "./link"
+import { useState } from "react"
+import NavLink from "./nav-link.jsx"
+import navConfig from "../data/nav-config.yaml"
+
+export function getStaticProps() {
+
+}
+
+const NavBar = () => {
+    const [expanded, updateExpanded] = useState(false)
+    const expand = () => updateExpanded(true)
+    const collapse = () => updateExpanded(false)
+    const toggle = () => updateExpanded(isExpanded => !isExpanded)
+
+    return <>
+        <div className={`usa-overlay ${expanded ? "is-visible" : ""}`}></div>
+        <Header basic>
+            <div className="usa-nav-container">
+                <div className="usa-navbar">
+                    <Title>
+                        <Link href="/" variant="unstyled">{navConfig.title}</Link>
+                    </Title>
+                    <NavMenuButton onClick={expand} label="Menú" />
+                </div>
+                <PrimaryNav
+                    items={Object.entries(navConfig.links).map(([title, target]) =>
+                        <NavLink href={target}
+                            key={title}
+                            onClick={collapse}>
+                            {title}
+                        </NavLink>
+                    )}
+                    mobileExpanded={expanded}
+                    onToggleMobileNav={toggle}>
+                    {/* <Search size="small" onSubmit={() => {}} /> */}
+                </PrimaryNav>
+            </div>
+        </Header>
+    </>
+}
+
+export default NavBar

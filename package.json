@@ -3,15 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 8842",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port 8842",
     "lint": "next lint"
   },
   "dependencies": {
+    "@mdx-js/loader": "^1.6.22",
+    "@next/mdx": "^11.0.1",
+    "@trussworks/react-uswds": "^2.0.0",
+    "async-cache": "^1.1.0",
+    "async-cache-promise": "^2.0.2",
+    "fs": "^0.0.1-security",
+    "gray-matter": "^4.0.3",
+    "js-yaml-loader": "^1.2.2",
+    "libphonenumber-js": "^1.9.21",
     "next": "11.0.1",
+    "next-mdx-remote": "^3.0.2",
+    "npm-run-all": "^4.1.5",
+    "paths": "^0.1.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "sass": "^1.35.1",
+    "slugify": "^1.5.3"
   },
   "devDependencies": {
     "eslint": "7.29.0",
