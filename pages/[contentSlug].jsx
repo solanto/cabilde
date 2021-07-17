@@ -53,12 +53,10 @@ export async function getStaticProps({ params }) {
 }
 
 const Content = ({ source, frontMatter }) =>
-    <div className="wrapper">
-        <main className="usa-prose grid-container">
-            <h1>{frontMatter.title}</h1>
-            <MDXRemote {...source} components={components} />
-        </main>
-    </div>
+    <main className="usa-prose grid-container">
+        <h1>{frontMatter.title}</h1>
+        <MDXRemote {...source} components={components} />
+    </main>
 
 
 export default Content
