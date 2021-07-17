@@ -3,7 +3,7 @@ import Image from "next/image"
 import styles from "../styles/Home.module.scss"
 import Link from "../components/link"
 import Hero from "../content/home/hero.mdx"
-
+ 
 const Home = () =>
   <>
     <Head>
@@ -17,7 +17,7 @@ const Home = () =>
         <Hero />
         <Link className="usa-button usa-button--big"
           variant="unstyled"
-          href="mensaje.">
+          href="./mensaje">
           Comenzar
         </Link>
       </section>
