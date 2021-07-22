@@ -7,18 +7,11 @@ import TableRow from "../../components/table-row"
 import Link from "../../components/link"
 import { renderName, slugifyName } from "../../lib/render-name"
 import parsePhone from "libphonenumber-js"
-import data from "../../data/governmental-data"
+import { representantes } from "../../data/gov"
+
 import { useRouter } from 'next/router'
 
-export async function getStaticProps() {
-    return {
-        props: {
-            representantes: await data.get("representantes")
-        }
-    }
-}
-
-const Representantes = ({ representantes }) => {
+const Representantes = () => {
     const router = useRouter()
     const { search: query } = router.query
 
