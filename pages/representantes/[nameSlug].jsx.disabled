@@ -3,7 +3,7 @@ import Image from "next/image"
 import { renderName, slugifyName } from "../../lib/render-name"
 import slugify from "../../lib/slugify"
 import data from "../../data/governmental-data"
-import styles from "../../styles/Perfil.module.scss"
+import styles from "../../styles/Perfil.module"
 import MaterialIcon from "../../components/material-icon"
 import TwitterTimeline from "../../components/twitter-timeline"
 import {

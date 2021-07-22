@@ -1,4 +1,4 @@
-import "../styles/globals.scss"
+import "../styles/globals"
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 

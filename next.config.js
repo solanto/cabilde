@@ -19,6 +19,16 @@ module.exports = withMDX({
       }
     )
 
+    config.resolve.extensions = [
+      ".js",
+      ".jsx",
+      ".mdx",
+      ".json",
+      ".yaml",
+      ".css",
+      ".scss"
+    ]
+
     return config
   }
 })

@@ -1,12 +1,8 @@
 import { Header, Title, NavMenuButton, PrimaryNav } from "@trussworks/react-uswds"
 import Link from "./link"
 import { useState } from "react"
-import NavLink from "./nav-link.jsx"
-import navConfig from "../data/nav-config.yaml"
-
-export function getStaticProps() {
-
-}
+import NavLink from "./nav-link"
+import navConfig from "../data/nav-config"
 
 const NavBar = () => {
     const [expanded, updateExpanded] = useState(false)
@@ -25,9 +21,9 @@ const NavBar = () => {
                     <NavMenuButton onClick={expand} label="Menú" />
                 </div>
                 <PrimaryNav
-                    items={Object.entries(navConfig.links).map(([title, target]) =>
+                    items={Object.entries(navConfig.links).map(([title, target], index) =>
                         <NavLink href={target}
-                            key={title}
+                            key={index}
                             onClick={collapse}>
                             {title}
                         </NavLink>
