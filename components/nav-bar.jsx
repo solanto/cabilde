@@ -2,7 +2,7 @@ import { Header, Title, NavMenuButton, PrimaryNav } from "@trussworks/react-uswd
 import Link from "./link"
 import { useState } from "react"
 import NavLink from "./nav-link"
-import navConfig from "../data/nav-config"
+import nav from "../data/nav"
 
 const NavBar = () => {
     const [expanded, updateExpanded] = useState(false)
@@ -16,15 +16,17 @@ const NavBar = () => {
             <div className="usa-nav-container">
                 <div className="usa-navbar">
                     <Title>
-                        <Link href="/" variant="unstyled">{navConfig.title}</Link>
+                        <Link href="/" variant="unstyled">{nav.title}</Link>
                     </Title>
                     <NavMenuButton onClick={expand} label="Menú" />
                 </div>
                 <PrimaryNav
-                    items={Object.entries(navConfig.links).map(([title, target], index) =>
-                        <NavLink href={target}
+                    items={Object.entries(nav.links).map(([title, target], index) =>
+                        <NavLink
+                            href={target}
                             key={index}
-                            onClick={collapse}>
+                            onClick={collapse}
+                        >
                             {title}
                         </NavLink>
                     )}
