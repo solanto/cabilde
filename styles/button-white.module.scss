@@ -1,0 +1,13 @@
+@import "./uswds/module";
+
+.button--white {
+    $text-color: "primary-darker";
+
+    @include u-text($text-color);
+    @include u-bg("base-lighter");
+
+    &:hover {
+        @include u-text($text-color);
+        @include u-bg("base-lightest");
+    }
+}
