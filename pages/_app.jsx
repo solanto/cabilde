@@ -1,12 +1,20 @@
-import "../styles/globals"
-import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
+import "@trussworks/react-uswds/lib/uswds.css"
+import Layout from "../components/layout" // TODO: move to layouts/app.jsx
+import "../styles/globals"
+import { MDXProvider } from "@mdx-js/react"
+import Link from "../components/link"
 
-import Layout from "../components/layout"
+
+const MDXComponents = {
+  a: Link
+}
 
 const App = ({ Component, pageProps }) =>
-  <Layout>
-    <Component {...pageProps} />
-  </Layout>
+  <MDXProvider components={MDXComponents}>
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  </MDXProvider>
 
 export default App

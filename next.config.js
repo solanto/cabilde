@@ -5,7 +5,7 @@ const withMDX = require("@next/mdx")({
   }
 })
 
-module.exports = withMDX({
+module.exports = {
   reactStrictMode: true,
   pageExtensions: ["jsx", "js"],
   images: {
@@ -16,6 +16,13 @@ module.exports = withMDX({
       {
         test: /\.ya?ml$/,
         use: "js-yaml-loader",
+      },
+      {
+        test: /\.mdx?$/,
+        use: [
+          "babel-loader",
+          "mdx-loader"
+        ]
       }
     )
 
@@ -31,4 +38,4 @@ module.exports = withMDX({
 
     return config
   }
-})
+}
