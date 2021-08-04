@@ -47,46 +47,46 @@ const tableOfContents = [
         title: "Perfil",
         current: true,
         icon: "person",
-        Section({ rep }) { return <Resumen {...{ rep, ...this }} /> }
+        // Section({ rep }) { return <Resumen {...{ rep, ...this }} /> }
     },
     {
         title: "Viajes y comisiones",
         anchor: "viajes-comisiones",
         icon: "near_me",
-        Section({ rep }) { return <ViajesComisiones {...{ rep, ...this }} /> }
+        // Section({ rep }) { return <ViajesComisiones {...{ rep, ...this }} /> }
     },
     {
         title: "Actividades",
         icon: "trending_up",
-        Section({ rep }) { return <Actividades {...{ rep, ...this }} /> }
+        // Section({ rep }) { return <Actividades {...{ rep, ...this }} /> }
     },
     {
         title: "Redes sociales",
         icon: "share",
-        Section({ rep }) { return <RedesSociales {...{ rep, ...this }} /> }
+        // Section({ rep }) { return <RedesSociales {...{ rep, ...this }} /> }
     },
     {
         title: "Lista de asistencia",
         anchor: "asistencia",
         icon: "inventory",
-        Section({ rep }) { }
+        // Section({ rep }) { }
     },
     {
         title: "Comisiones y comités",
         anchor: "comisiones-comites",
         icon: "work",
-        Section({ rep }) { }
+        // Section({ rep }) { }
     },
     {
         title: "Iniciativas",
         icon: "edit",
-        Section({ rep }) { }
+        // Section({ rep }) { }
     },
     {
         title: "Preguntas y respuestas",
         anchor: "preguntas-respuestas",
         icon: "forum",
-        Section({ rep }) { }
+        // Section({ rep }) { }
     }
 ]
 
