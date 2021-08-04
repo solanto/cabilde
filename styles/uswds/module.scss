@@ -1,8 +1,21 @@
+$test-system-color-tokens: false;
+
 @import '/node_modules/uswds/src/stylesheets/theme/_uswds-theme-general.scss';
 @import '/node_modules/uswds/src/stylesheets/theme/_uswds-theme-typography.scss';
 @import '/node_modules/uswds/src/stylesheets/theme/_uswds-theme-spacing.scss';
 @import '/node_modules/uswds/src/stylesheets/theme/_uswds-theme-color.scss';
 @import '/node_modules/uswds/src/stylesheets/theme/_uswds-theme-utilities.scss';
 
-// Custom theme settings/USWDS overrides go here <-- the settings you defined above
+@import "/node_modules/uswds/src/stylesheets/settings/settings-components";
+
+@import "/node_modules/uswds/src/stylesheets/core/functions";
+@import "/node_modules/uswds/src/stylesheets/core/system-tokens";
+@import "/node_modules/uswds/src/stylesheets/core/variables";
+@import "/node_modules/uswds/src/stylesheets/core/properties";
+@import "/node_modules/uswds/src/stylesheets/core/mixins/all";
+@import "/node_modules/uswds/src/stylesheets/core/placeholders/all";
+
+@import "/node_modules/uswds/src/stylesheets/core/deprecated";
+@import "/node_modules/uswds/src/stylesheets/core/notifications";
+
 @import './settings.scss';

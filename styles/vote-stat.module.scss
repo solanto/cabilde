@@ -1,0 +1,14 @@
+@import "./uswds/module";
+
+.a-favor {
+    @include u-text("green-60v");
+}
+
+.en-contra {
+    @include u-text("red-60v");
+}
+
+:export {
+    barra__a-favor: color("green-50v");
+    barra__en-contra: color("red-50v");
+}

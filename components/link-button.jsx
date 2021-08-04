@@ -1,9 +1,9 @@
 import Link from "./link"
 
-const LinkButton = ({ className, size, href, children }) =>
+const LinkButton = ({ className, size, children, ...props }) =>
     <Link className={`usa-button ${size == "big" ? "usa-button--big" : ""} ${className}`}
         variant="unstyled"
-        {...{ href }}>
+        {...props}>
         {children}
     </Link>
 

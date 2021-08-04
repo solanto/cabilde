@@ -1,30 +1,19 @@
-import Head from "next/head"
 import {
-  Form,
-  Fieldset as FieldSet,
-  Label,
-  TextInput,
-  Dropdown,
-  Textarea as TextArea,
-  ButtonGroup,
-  Button,
-  ComboBox,
-  Accordion
+  Accordion, Button, Fieldset as FieldSet, Form, Label, Textarea as TextArea, TextInput
 } from "@trussworks/react-uswds"
-import styles from "../styles/Mensaje.module"
-import { representantes } from "../data/gov"
-import { useRouter } from "next/router"
-import { renderName, slugifyName } from "../lib/render-name"
-import { normalize } from "normalize-diacritics"
 import FuzzySearch from "fuzzy-search"
-import { AsyncSelect } from "../components/select"
-import { CopyToClipboard } from "react-copy-to-clipboard"
 import { decompressFromEncodedURIComponent as URIDecompress } from "lz-string"
-import { getSharingURL } from "./api/mensaje/compartir"
-import { useState } from "react"
-import ensureArray from "../lib/ensure-array"
+import Head from "next/head"
+import { useRouter } from "next/router"
+import { normalize } from "normalize-diacritics"
 import QRCode from "qrcode.react"
+import { useState } from "react"
+import { AsyncSelect } from "../components/select"
 import domain from "../data/domain"
+import { representantes } from "../data/gov"
+import ensureArray from "../lib/ensure-array"
+import renderName, { slugifyName } from "../lib/render-name"
+import { getSharingURL } from "./api/mensaje/compartir"
 
 export async function getServerSideProps({ query: { s: compressedSujeto, m: compressedMensaje, r: unsafeReceptores } }) {
   let mensaje, sujeto
@@ -68,7 +57,6 @@ export async function getServerSideProps({ query: { s: compressedSujeto, m: comp
 
 const Mensaje = ({ todosRepNombres, receptores, mensaje, sujeto }) => {
   const router = useRouter()
-  console.log(domain)
 
   const repSearch = new FuzzySearch(todosRepNombres, ["name", "normalized"], {
       caseSensitive: false
