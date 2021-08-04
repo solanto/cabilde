@@ -1,6 +1,6 @@
 import slugify from "../lib/slugify"
 
-const Section = ({ title, anchor = slugify("title"), children }) =>
+const Section = ({ title, anchor = slugify(title), children }) =>
     <section>
         <h2 id={anchor}>{title}</h2>
         {children}

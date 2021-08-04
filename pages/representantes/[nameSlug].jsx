@@ -1,21 +1,19 @@
 import Head from "next/head"
 import Image from "next/image"
-import { renderName, slugifyName } from "../../lib/render-name"
+import renderName, { slugifyName } from "../../lib/render-name"
 import slugify from "../../lib/slugify"
-import data from "../../data/governmental-data"
 import styles from "../../styles/Perfil.module"
 import MaterialIcon from "../../components/material-icon"
 import TwitterTimeline from "../../components/twitter-timeline"
-import {
-    Resumen,
-    ViajesComisiones,
-    Actividades,
-    RedesSociales
-} from "../../components/perfil"
+// import {
+//     Resumen,
+//     ViajesComisiones,
+//     Actividades,
+//     RedesSociales
+// } from "../../components/perfil"
+import { representantes } from "../../data/gov"
 
 export async function getStaticPaths() {
-    const representantes = await data.get("representantes")
-
     const paths = representantes.map(rep => {
         return {
             params: {
@@ -31,8 +29,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const representantes = await data.get("representantes")
-
     const props = {
         rep: representantes.find(rep => slugifyName(rep.nombre) == params.nameSlug)
     }
@@ -57,7 +53,7 @@ const tableOfContents = [
         title: "Viajes y comisiones",
         anchor: "viajes-comisiones",
         icon: "near_me",
-        Section({ rep }) { return <ViajesComisiones {...{ rep, ...this }} />}
+        Section({ rep }) { return <ViajesComisiones {...{ rep, ...this }} /> }
     },
     {
         title: "Actividades",
@@ -131,9 +127,7 @@ const Perfil = ({ rep, quickActions }) =>
                 </ul>
             </nav>
             <section className="tablet:grid-col-fill contenido-derecha">
-                {tableOfContents.map(({ title, anchor, Section }, index) =>
-                    <Section key={index} title="hi" anchor="yee" rep={rep} />
-                )}
+                
             </section>
             <TwitterTimeline handle={rep.contacto.twitter} displayName={renderName(rep.nombre)} />
         </div>
