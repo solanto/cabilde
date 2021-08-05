@@ -1,8 +1,5 @@
 import Head from "next/head"
 import Image from "next/image"
-import renderName, { slugifyName } from "../../lib/render-name"
-import slugify from "../../lib/slugify"
-import styles from "../../styles/Perfil.module"
 import MaterialIcon from "../../components/material-icon"
 import TwitterTimeline from "../../components/twitter-timeline"
 // import {
@@ -12,6 +9,9 @@ import TwitterTimeline from "../../components/twitter-timeline"
 //     RedesSociales
 // } from "../../components/perfil"
 import { representantes } from "../../data/gov"
+import renderName, { slugifyName } from "../../lib/render-name"
+import slugify from "../../lib/slugify"
+import styles from "../../styles/Perfil.module"
 
 export async function getStaticPaths() {
     const paths = representantes.map(rep => {
@@ -90,7 +90,7 @@ const tableOfContents = [
     }
 ]
 
-const Perfil = ({ rep, quickActions }) =>
+const Perfil = ({rep: { nombre, contacto }, quickActions }) =>
     <div className="grid-container">
         <Head>
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
@@ -103,7 +103,7 @@ const Perfil = ({ rep, quickActions }) =>
                 width="200px"
                 height="200px" />
             <div id="rep-intro-detalles" className="tablet:grid-col-fill contenido-derecha">
-                <h1>Dip. {renderName(rep.nombre)}</h1>
+                <h1>Dip. {renderName(nombre)}</h1>
                 <ul className="usa-button-group usa-button-group--segmented">
                     {Object.entries(quickActions).map(([title, target], index) =>
                         <li key={index} className="usa-button-group__item">
@@ -129,7 +129,7 @@ const Perfil = ({ rep, quickActions }) =>
             <section className="tablet:grid-col-fill contenido-derecha">
                 
             </section>
-            <TwitterTimeline handle={rep.contacto.twitter} displayName={renderName(rep.nombre)} />
+            <TwitterTimeline handle={contacto.twitter} displayName={renderName(nombre)} />
         </div>
     </div>
 

@@ -3,7 +3,7 @@ import ReactSelect from "react-select"
 import ReactAsyncSelect from "react-select/async"
 import FixRequiredSelect from "./fix-required-select"
 
-export const Select = forwardRef((props, ref) =>
+const Select = forwardRef((props, ref) =>
     <FixRequiredSelect
         {...{ ref, ...props }}
         SelectComponent={ReactSelect}
@@ -12,7 +12,7 @@ export const Select = forwardRef((props, ref) =>
 
 Select.displayName = "Select"
 
-export const AsyncSelect = forwardRef((props, ref) =>
+const AsyncSelect = forwardRef((props, ref) =>
     <FixRequiredSelect
         {...{ ref, ...props }}
         SelectComponent={ReactAsyncSelect}
@@ -20,3 +20,5 @@ export const AsyncSelect = forwardRef((props, ref) =>
 )
 
 AsyncSelect.displayName = "AsyncSelect"
+
+export { Select, AsyncSelect }

@@ -11,6 +11,7 @@ import TableRow from "../../components/table-row"
 import renderName, { slugifyName } from "../../lib/render-name"
 import sameNames from "../../lib/same-names"
 
+
 export function getStaticPaths() {
     return {
         paths: iniciativas.map(({ expediente }) => (
