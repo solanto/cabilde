@@ -137,6 +137,7 @@ const VotacionesIniciativas = ({ inicQuery, inicMatches }) => {
                 getOnClick={({ expediente }) =>
                     () => !selecting(window) && router.push(inicLink(expediente.slugified))
                 }
+                noDataMessage="Ninguna iniciativa correspondió a tu búsqueda."
             />
         </div>
     )

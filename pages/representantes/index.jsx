@@ -12,6 +12,7 @@ import { representantes } from "../../data/gov"
 import Layout from "../../layouts/representantes"
 import renderName, { renderNameNormalized, slugifyName } from "../../lib/render-name"
 import selecting from "../../lib/selecting"
+import Head from "next/head"
 
 
 const tableReps = representantes.map(({
@@ -125,6 +126,7 @@ const Representantes = ({ repQuery, repMatches }) => {
                 getOnClick={({ nombre }) =>
                     () => !selecting(window) && router.push(repLink(nombre.slugified))
                 }
+                noDataMessage="Ningún representante correspondió a tu búsqueda."
             />
         </Layout>
     )

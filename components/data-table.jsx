@@ -1,6 +1,7 @@
 import { Table } from "@trussworks/react-uswds"
 import { useCallback, useEffect, useRef } from "react"
 import clickableTableStyles from "../styles/clickable-table.module"
+import NoData from "./no-data"
 
 
 /**
@@ -18,6 +19,7 @@ import clickableTableStyles from "../styles/clickable-table.module"
  * @param {function(dataItem):Object.<string, import("react").ReactChild>} [props.getEntry=item => item]
  * @param {string} props.rowHeader
  * @param {function(dataItem):function(Event):undefined} [props.getOnClick]
+ * @param {string} [props.noDataMessage]
  */
 
 const DataTable = ({
@@ -25,13 +27,17 @@ const DataTable = ({
     templateData = data[0],
     getEntry = item => item,
     rowHeader,
-    getOnClick = undefined,
+    getOnClick,
+    noDataMessage,
     ...props
 }) => {
     const bodyRef = useCallback(
-        node => node && node.classList.add(clickableTableStyles["tbody--clickable"]),
-        []
+        node => node && getOnClick
+            && node.classList.add(clickableTableStyles["tbody--clickable"]),
+        [getOnClick]
     )
+
+    if (data.length == 0) return <NoData>{noDataMessage}</NoData>
 
     return (
         <Table {...props}>
