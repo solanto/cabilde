@@ -1,6 +1,8 @@
 import { Grid, GridContainer } from "@trussworks/react-uswds"
 import FuzzySearch from "fuzzy-search"
 import parsePhone from "libphonenumber-js"
+import { useRouter } from "next/router"
+import { useEffect } from "react"
 import Image from "next/image"
 import DataTable from "../../components/data-table"
 import Link from "../../components/link"
@@ -9,6 +11,7 @@ import Instrucciones from "../../content/representantes/instrucciones"
 import { representantes } from "../../data/gov"
 import Layout from "../../layouts/representantes"
 import renderName, { renderNameNormalized, slugifyName } from "../../lib/render-name"
+import selecting from "../../lib/selecting"
 
 
 const tableReps = representantes.map(({
@@ -59,54 +62,72 @@ export async function getServerSideProps({ query: { busqueda: repQuery = "" } })
     }
 }
 
-const Representantes = ({ repQuery, repMatches }) =>
-    <Layout>
-        <GridContainer>
-            <Grid row>
-                <Grid tablet={{ col: 8 }}>
-                    <Instrucciones />
+function repLink(slug) {
+    return `/representantes/${slug}/`
+}
+
+const Representantes = ({ repQuery, repMatches }) => {
+    const router = useRouter()
+
+    useEffect(
+        () => document.getElementById("tabla"),
+        [repMatches]
+    )
+
+    return (
+        <Layout>
+            <GridContainer>
+                <Grid row>
+                    <Grid tablet={{ col: 8 }}>
+                        <Instrucciones />
+                    </Grid>
+                    <Grid tablet={{ col: 4 }}>
+                        <Image
+                            src="https://picsum.photos/seed/ine/200/100"
+                            alt=""
+                            width="200"
+                            height="100"
+                        />
+                    </Grid>
                 </Grid>
-                <Grid tablet={{ col: 4 }}>
-                    <Image
-                        src="https://picsum.photos/seed/ine/200/100"
-                        alt=""
-                        width="200"
-                        height="100"
-                    />
-                </Grid>
-            </Grid>
-        </GridContainer>
-        <Search
-            defaultValue={repQuery}
-            placeholder="Busca a tu representante"
-        />
-        <DataTable
-            caption="This is a striped table"
-            stackedStyle="headers"
-            scrollable
-            fullWidth
-            data={repMatches}
-            templateData={tableReps[0]}
-            getEntry={({ nombre, seccion, distrito, partido, comisiones, telefono }) => (
-                {
-                    // TODO: add photo, section
-                    "Foto": <i>foto</i>,
-                    "Nombre":
-                        <Link href={`/representantes/${nombre.slugified}/`}>
-                            {nombre.verbatim}
-                        </Link>,
-                    "Sección eletoral": seccion,
-                    "Distrito eletoral": distrito,
-                    "Partido": partido,
-                    "Comisiones": comisiones.join(", "),
-                    "Teléfono":
-                        <Link href={telefono.RFC3966}>
-                            {telefono.pretty}
-                        </Link>
+            </GridContainer>
+            <Search
+                defaultValue={repQuery}
+                placeholder="Busca a tu representante"
+            />
+            <DataTable
+                id="tabla"
+                caption="This is a striped table"
+                stackedStyle="headers"
+                scrollable
+                fullWidth
+                data={repMatches}
+                templateData={tableReps[0]}
+                getEntry={({ nombre, seccion, distrito, partido, comisiones, telefono }) => (
+                    {
+                        // TODO: add photo, section
+                        "Foto": <i>foto</i>,
+                        "Nombre":
+                            <Link href={repLink(nombre.slugified)}>
+                                {nombre.verbatim}
+                            </Link>,
+                        "Sección eletoral": seccion,
+                        "Distrito eletoral": distrito,
+                        "Partido": partido,
+                        "Comisiones": comisiones.join(", "),
+                        "Teléfono":
+                            <Link href={telefono.RFC3966}>
+                                {telefono.pretty}
+                            </Link>
+                    }
+                )}
+                rowHeader="Nombre"
+                getOnClick={({ nombre }) =>
+                    () => !selecting(window) && router.push(repLink(nombre.slugified))
                 }
-            )}
-            rowHeader="Nombre"
-        />
-    </Layout>
+            />
+        </Layout>
+    )
+}
 
 export default Representantes

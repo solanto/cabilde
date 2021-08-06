@@ -1,0 +1,27 @@
+@import "./uswds/module";
+
+.tbody--clickable {
+    @include at-media("mobile-lg") {
+        &:hover {
+            tr {
+                // @include u-bg("base-lightest");
+                z-index: -1;
+
+                td,
+                th {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        tr {
+            &:hover {
+                cursor: pointer;
+                background-color: white;
+                @include u-shadow(2);
+                background-color: scale-color(color("primary-lighter"), $whiteness: 50%);
+                z-index: 1;
+            }
+        }
+    }
+}
