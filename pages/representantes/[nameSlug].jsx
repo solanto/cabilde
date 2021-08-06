@@ -92,10 +92,6 @@ const tableOfContents = [
 
 const Perfil = ({rep: { nombre, contacto }, quickActions }) =>
     <div className="grid-container">
-        <Head>
-            <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
-        </Head>
-
         <section id="rep-intro" className="grid-row">
             <Image className={styles["icono-perfil"] + " tablet:grid-col-3"}
                 src="https://picsum.photos/200"
