@@ -172,7 +172,7 @@ const Mensaje = ({ todosRepNombres, receptores, mensaje, sujeto }) => {
                           : "Genera un enlace de compartir"
                         }
                       </Button>
-                      <QRCode renderAs="svg" value={domain + messagePath} />
+                      <QRCode renderAs="svg" value={`https://${domain}${messagePath}`} />
                     </>
                 }
               ]} />
