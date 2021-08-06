@@ -27,6 +27,7 @@
     "mdx-loader": "^3.0.2",
     "next": "11.0.1",
     "next-mdx-remote": "^3.0.4",
+    "nextjs-progressbar": "^0.0.11",
     "normalize-diacritics": "^2.14.0",
     "paths": "^0.1.1",
     "qrcode.react": "^1.0.1",
