@@ -77,7 +77,7 @@ const inicSearch = new FuzzySearch(tableInics,
     }
 )
 
-export async function getServerSideProps({ query: { search: inicQuery = "" } }) {
+export async function getServerSideProps({ query: { busqueda: inicQuery = "" } }) {
     return {
         props: {
             inicQuery,
@@ -137,7 +137,7 @@ const VotacionesIniciativas = ({ inicQuery, inicMatches }) => {
                 getOnClick={({ expediente }) =>
                     () => !selecting(window) && router.push(inicLink(expediente.slugified))
                 }
-                noDataMessage="Ninguna iniciativa correspondió a tu búsqueda."
+                noDataMessage="Ningún representante correspondió a tu búsqueda."
             />
         </div>
     )

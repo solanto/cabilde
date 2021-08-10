@@ -15,7 +15,7 @@ const Search = ({ size = "big", defaultValue, placeholder }) =>
         className={`usa-search ${size == "small" ? "usa-search--small" : "usa-search--big"}`}
     >
         <Label htmlFor="buscar" class="usa-sr-only">Busca</Label>
-        <TextInput id="buscar" name="search" type="search" {...{ defaultValue, placeholder }} />
+        <TextInput id="buscar" name="busqueda" type="search" {...{ defaultValue, placeholder }} />
         <Button
             type="submit" 
             className="usa-search__submit-text" 
