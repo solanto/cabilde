@@ -77,7 +77,7 @@ const inicSearch = new FuzzySearch(tableInics,
     }
 )
 
-export async function getServerSideProps({ query: { busqueda: inicQuery = "" } }) {
+export async function getServerSideProps({ query: { search: inicQuery = "" } }) {
     return {
         props: {
             inicQuery,

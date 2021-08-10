@@ -54,7 +54,7 @@ const repSearch = new FuzzySearch(tableReps,
     }
 )
 
-export async function getServerSideProps({ query: { busqueda: repQuery = "" } }) {
+export async function getServerSideProps({ query: { search: repQuery = "" } }) {
     return {
         props: {
             repQuery,
