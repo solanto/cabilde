@@ -6,6 +6,7 @@ import { MDXProvider } from "@mdx-js/react"
 import Link from "../components/link"
 import ProgressBar from 'nextjs-progressbar';
 import progressBarStyles from "../styles/progress-bar.module"
+import Head from "next/head"
 
 
 const MDXComponents = {
@@ -14,6 +15,9 @@ const MDXComponents = {
 
 const App = ({ Component, pageProps }) =>
   <MDXProvider components={MDXComponents}>
+    <Head>
+      
+    </Head>
     <ProgressBar
       color={progressBarStyles["progress-bar"]}
       startPosition={0.3}
