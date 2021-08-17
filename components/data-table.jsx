@@ -22,6 +22,18 @@ import NoData from "./no-data"
  * @param {string} [props.noDataMessage]
  */
 
+const onClickBlockers = [
+    "A",
+    "BUTTON"
+]
+
+function discernClick(onClick) {
+    return event =>
+        !onClickBlockers.includes(event.target.nodeName)
+            && typeof event.target.onclick != "function"
+            && onClick(event)
+}
+
 const DataTable = ({
     data,
     templateData = data[0],
@@ -55,7 +67,7 @@ const DataTable = ({
                 {data.map((item, index) =>
                     <tr
                         key={index}
-                        onClick={getOnClick ? getOnClick(item) : null}
+                        onClick={getOnClick ? discernClick(getOnClick(item)) : null}
                     >
                         {Object
                             .entries(getEntry(item))
