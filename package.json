@@ -25,7 +25,7 @@
     "lz-string": "^1.4.4",
     "mailto-link": "^2.0.0",
     "mdx-loader": "^3.0.2",
-    "next": "11.1.0",
+    "next": "11.1.1",
     "next-mdx-remote": "^3.0.4",
     "nextjs-progressbar": "^0.0.11",
     "normalize-diacritics": "^2.14.0",
