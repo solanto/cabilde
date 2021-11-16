@@ -1,5 +1,5 @@
 import {
-  Accordion, Button, Fieldset as FieldSet, Form, Label, Textarea as TextArea, TextInput
+  Accordion, Button, Fieldset as FieldSet, Form, GridContainer, Label, Textarea as TextArea, TextInput
 } from "@trussworks/react-uswds"
 import FuzzySearch from "fuzzy-search"
 import { decompressFromEncodedURIComponent as URIDecompress } from "lz-string"
@@ -98,6 +98,9 @@ const Mensaje = ({ todosRepNombres, receptores, mensaje, sujeto }) => {
       </Head>
 
       <main>
+        <GridContainer>
+          <h1>Mensaje</h1>
+        </GridContainer>
         <section>
           <Form className={styles["form"]}>
             <FieldSet>
@@ -151,7 +154,7 @@ const Mensaje = ({ todosRepNombres, receptores, mensaje, sujeto }) => {
                   id: "enviar",
                   content:
                     <>
-                      <p>información</p>
+                      <p>¡Usa tu voz!</p>
                       <Button type="submit" formAction="/api/mensaje/enviar">
                         Genera un correo electrónico
                       </Button>
@@ -162,7 +165,7 @@ const Mensaje = ({ todosRepNombres, receptores, mensaje, sujeto }) => {
                   id: "compartir",
                   content:
                     <>
-                      <p>información</p>
+                      <p>¡Comparte este código para darles este mensage como plantilla a tus amigos!</p>
                       <Button
                         type="submit"
                         formAction="/api/mensaje/compartir"
@@ -173,7 +176,11 @@ const Mensaje = ({ todosRepNombres, receptores, mensaje, sujeto }) => {
                           : "Genera un enlace de compartir"
                         }
                       </Button>
-                      <QRCode renderAs="svg" value={`https://${domain}${messagePath}`} />
+                      <QRCode
+                        renderAs="svg"
+                        value={`https://${domain}${messagePath}`}
+                        className={styles["codigo-compartir"]}
+                      />
                     </>
                 }
               ]} />
