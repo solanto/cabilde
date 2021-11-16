@@ -14,6 +14,7 @@ import { representantes } from "../data/gov"
 import ensureArray from "../lib/ensure-array"
 import renderName, { slugifyName } from "../lib/render-name"
 import { getSharingURL } from "./api/mensaje/compartir"
+import styles from "../styles/Mensaje.module"
 
 export async function getServerSideProps({ query: { s: compressedSujeto, m: compressedMensaje, r: unsafeReceptores } }) {
   let mensaje, sujeto
@@ -98,7 +99,7 @@ const Mensaje = ({ todosRepNombres, receptores, mensaje, sujeto }) => {
 
       <main>
         <section>
-          <Form>
+          <Form className={styles["form"]}>
             <FieldSet>
               <Label htmlFor="r">Mándales este mensaje a:</Label>
               <AsyncSelect
