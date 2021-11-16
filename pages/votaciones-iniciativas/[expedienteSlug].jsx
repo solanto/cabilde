@@ -5,11 +5,16 @@ import { GridContainer, Grid, Table } from "@trussworks/react-uswds"
 import Link from "../../components/link"
 import LinkButton from "../../components/link-button"
 import { Line } from "rc-progress"
-import styles from "../../styles/vote-stat.module"
+import statStyles from "../../styles/vote-stat.module"
 import VoteStat from "../../components/vote-stat"
 import TableRow from "../../components/table-row"
 import renderName, { slugifyName } from "../../lib/render-name"
 import sameNames from "../../lib/same-names"
+import DataTable from "../../components/data-table"
+import selecting from "../../lib/selecting"
+import { useRouter } from "next/router"
+import styles from "../../styles/Votaciones-Iniciativas.module"
+import Icon from "../../components/material-icon"
 
 
 export function getStaticPaths() {
@@ -25,10 +30,76 @@ export function getStaticPaths() {
     }
 }
 
+function inicData({
+    expediente,
+    votacion,
+    mayoriaEspecial,
+    asunto,
+    fecha
+}) {
+    return {
+        expediente,
+        repVotes: byRep(votacion).map(({ nombre, votacionKey }) => {
+            const { partido, representacion, distrito, municipio } =
+                representantes.find(({ nombre: candidate }) => sameNames(nombre, candidate))
+                || {}
+
+            return {
+                nombre: renderName(nombre),
+                link: `/representantes/${slugifyName(nombre)}`,
+                votacionKey,
+                partido,
+                representacion,
+                distrito,
+                municipio
+            }
+        }),
+        asunto
+    }
+}
+
 export function getStaticProps({ params: { expedienteSlug } }) {
+    const {
+        expediente,
+        votacion,
+        mayoriaEspecial,
+        asunto,
+        fecha
+    } = iniciativas.find(
+        ({ expediente: candidate }) => slugifyExpediente(candidate) == expedienteSlug
+    )
+
     return {
         props: {
-            inic: iniciativas.find(({ expediente }) => slugifyExpediente(expediente) == expedienteSlug)
+            expediente,
+            asunto,
+            votacion,
+            repVotes: byRep(votacion)
+                .map(({ nombre, votacionKey }) => (
+                    {
+                        nombre,
+                        votacionKey,
+                        ...representantes.find(({ nombre: candidate }) => sameNames(nombre, candidate))
+                    }
+                ))
+                .map(({
+                    nombre,
+                    votacionKey,
+                    partido,
+                    representacion,
+                    distrito,
+                    municipio
+                }) => (
+                    {
+                        nombre: renderName(nombre),
+                        link: `/representantes/${slugifyName(nombre)}`,
+                        votacionKey,
+                        partido: partido || null,
+                        representacion: representacion || null,
+                        distrito: distrito || null,
+                        municipio: municipio || null
+                    }
+                ))
         }
     }
 }
@@ -52,8 +123,9 @@ const VoteStats = ({ votacion }) => {
             aria-hidden="true"
             percent={percents.aFavor}
             strokeLinecap="square"
-            strokeColor={styles["barra__a-favor"]}
-            trailColor={styles["barra__en-contra"]}
+            strokeColor={statStyles["barra__a-favor"]}
+            trailColor={statStyles["barra__en-contra"]}
+            class={styles["barra-votacion"]}
         />
 
         const PresentDetail = ({ title, statKey, styleKey }) =>
@@ -93,7 +165,19 @@ const VoteStats = ({ votacion }) => {
     )
 }
 
-const Iniciativa = ({ inic: { expediente, votacion, mayoriaEspecial, asunto, fecha } }) => {
+const Iniciativa = (
+    {
+        expediente,
+        votacion,
+        mayoriaEspecial,
+        asunto,
+        fecha,
+        repVotes,
+        representacion
+    }
+) => {
+    const router = useRouter()
+
     return (
         <article>
             <GridContainer>
@@ -113,54 +197,45 @@ const Iniciativa = ({ inic: { expediente, votacion, mayoriaEspecial, asunto, fec
                 </Grid>
             </GridContainer>
             <VoteStats {...{ votacion }} />
-            <Table
-                caption={"This is a striped table"}
-                stackedStyle="headers"
-                scrollable
-                fullWidth
-            >
-                <thead>
-                    {/* TODO: make nombre header, not foto (edit TableRow; maybe abstract interface) */}
-                    <TableRow head-section items={[
-                        { body: "Foto" },
-                        { body: "Nombre" },
-                        { body: "Partido" },
-                        { body: "Representación" },
-                        { body: "Distrito eletoral" },
-                        { body: "Municipio" },
-                        { body: "Votación" }
-                    ]} />
-                </thead>
-                <tbody>
-                    {byRep(votacion).map(({ nombre, votacionKey }, index) => {
-                        const { partido, representacion, distrito, municipio } =
-                            representantes.find(({ nombre: candidate }) => sameNames(nombre, candidate))
-                            || {}
-
-                        return (
-                            <TableRow key={index} items={[
-                                { body: <i>foto</i> },
-                                {
-                                    body:
-                                        <Link href={`/representantes/${slugifyName(nombre)}`}>
-                                            {renderName(nombre)}
-                                        </Link>
-                                },
-                                { body: partido },
-                                { body: representacion },
-                                { body: distrito },
-                                { body: municipio },
-                                {
-                                    body:
-                                        <VoteStat styleKey={toStyleKey(votacionKey)}>
-                                            {renderVotacionKey(votacionKey)}
-                                        </VoteStat>
-                                }
-                            ]} />
+            <section className={styles["rep-votes"]}>
+                <DataTable
+                    caption="Cómo votaron los representantes:"
+                    stackedStyle="headers"
+                    scrollable
+                    fullWidth
+                    data={repVotes}
+                    getEntry={
+                        (
+                            {
+                                nombre,
+                                link,
+                                partido,
+                                representacion,
+                                distrito,
+                                municipio,
+                                votacionKey
+                            }
+                        ) => (
+                            {
+                                "Foto": <Icon icon="account_circle"/>,
+                                "Nombre": <Link href={link}>{nombre}</Link>,
+                                "Partido": partido,
+                                "Representación": representacion,
+                                "Distrito eletoral": distrito,
+                                "Municipio": municipio,
+                                "Votacíon":
+                                    <VoteStat styleKey={toStyleKey(votacionKey)}>
+                                        {renderVotacionKey(votacionKey)}
+                                    </VoteStat>
+                            }
                         )
-                    })}
-                </tbody>
-            </Table>
+                    }
+                    getOnClick={({ link }) =>
+                        () => !selecting(window) && router.push(link)
+                    }
+                    noDataMessage="Aún ninguna votación se ha registrado."
+                />
+            </section>
         </article>
     )
 }

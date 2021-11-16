@@ -106,7 +106,7 @@ const VotacionesIniciativas = ({ inicQuery, inicMatches }) => {
                 defaultValue={inicQuery}
             />
             <DataTable
-                caption="yee"
+                caption="Encontramos:"
                 stackedStyle="headers"
                 scrollable
                 fullWidth

@@ -9,19 +9,6 @@ import NoData from "./no-data"
  * @typedef {typeof Table} USWDSTable
  */
 
-/**
- * 
- * @template dataItem
- * @augments USWDSTable
- * @param {object} props
- * @param {dataItem[]} props.data
- * @param {dataItem} [props.templateData=data[0]]
- * @param {function(dataItem):Object.<string, import("react").ReactChild>} [props.getEntry=item => item]
- * @param {string} props.rowHeader
- * @param {function(dataItem):function(Event):undefined} [props.getOnClick]
- * @param {string} [props.noDataMessage]
- */
-
 const onClickBlockers = [
     "A",
     "BUTTON"
@@ -33,6 +20,19 @@ function discernClick(onClick) {
             && typeof event.target.onclick != "function"
             && onClick(event)
 }
+
+/**
+ *
+ * @template dataItem
+ * @augments USWDSTable
+ * @param {object} props
+ * @param {dataItem[]} props.data
+ * @param {dataItem} [props.templateData=data[0]]
+ * @param {function(dataItem):Object.<string, import("react").ReactChild>} [props.getEntry=item => item]
+ * @param {string} props.rowHeader
+ * @param {function(dataItem):function(Event):undefined} [props.getOnClick]
+ * @param {string} [props.noDataMessage]
+ */
 
 const DataTable = ({
     data,
